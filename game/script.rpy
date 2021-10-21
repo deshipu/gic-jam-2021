@@ -10,6 +10,15 @@ define gui.bar_tile = False
 define fadehold = Fade(0.5, 0, 0.5)
 define fadehold1 = Fade(0.5, 1.0, 1.0)
 
+screen energy_bar:
+    bar value StaticValue(energy, 100):
+        xalign 0.0 yalign 0.0
+        xmaximum 400
+        ymaximum 15
+
+init:
+    $ energy = 50
+
 # The game starts here.
 
 label start:
@@ -21,35 +30,38 @@ label start:
     scene bg_room
     with fade
 
+    show screen energy_bar
+    with fade
+
     show spritething
 
     m "Hello citizen! Megacorp sponsors you this beautiful morning."
     y "Hello Megacorp."
     m  "What do you want to do today?"
-    
+
     menu:
         "Go to the moon":
             jump gotomoon
-          
+
         "Go to work":
             jump gotowork
-          
+
         "Play games":
             jump playgames
-    
-    
+
     label gotomoon:
         m "Silly thing, you cannot go to the Moon. Choose something else"
         ""
     menu:
             "Go to work":
                jump gotowork
-     
-        
+
+
             "Play games":
                jump playgames
 
     label playgames:
+        $ energy = 25
         m "I don't think this is the right choice, but it's not like I can force you."
         m "Enjoy wasting your day without generating profit for Megacorp. Megacorp cares."
         m "Remember. Megacorp cares."
@@ -163,20 +175,20 @@ label start:
         "Keep insisting":
            jump insisting
 
-    label notthere:
+label notthere:
     hide spritething_concern
     show spritething_suspicious
-        y "Ah, you're right, I can't actually see anything."
-        y "It must have been my imagination."
-        m "Yes, must have been, citizen."
-        m "Why not rest and buy yourself a brand new Product?"
+    y "Ah, you're right, I can't actually see anything."
+    y "It must have been my imagination."
+    m "Yes, must have been, citizen."
+    m "Why not rest and buy yourself a brand new Product?"
 
 
 
         
-    label insisting:
-        y "But look, there it is running out."
-        m "You seem disturbed citizen. Please wait for our Authority Enforcers to help you understand the truth."
+label insisting:
+    y "But look, there it is running out."
+    m "You seem disturbed citizen. Please wait for our Authority Enforcers to help you understand the truth."
 
 
 
