@@ -117,11 +117,11 @@ label start:
             jump playgames1 
 
     label playgames1:
-        show spritething_suspicious
+        show spritething
         m "I don't think this is the right choice, but it's not like I can force you."
         m "Enjoy wasting your day without generating profit for Megacorp. Megacorp cares."
         m "Remember. Megacorp cares."
-        hide spritething_suspicious
+        hide spritething
 
         jump backhome
     # bar gets smaller
@@ -129,7 +129,7 @@ label start:
     
     label gotowork1:
         scene bg_work
-        show spritething
+        show spritething_suspicious
         m "I'm glad you're choosing to be a good member of society. Now go earn your money so you can buy more things. Remember, Megacorp cares."
         "You work diligently the whole day."
         jump backhome
@@ -140,10 +140,14 @@ label start:
     label backhome:
     scene bg_room
     show spritething
-    m "Oh look, we're going to release a new Phone. Do you want to preorder?"
+    m "Oh look, we're going to release a new mPhone. Do you want to preorder?"
     y "Of course I want to preorder"
+    hide spritething
+    show spritething_concern
     #bar gets smaller
     y "I wanted what that bar I keep seeing means."
+    hide spritething_concern
+    show spritething
     y "Whatever, guess I'll just sleep."
 
     scene bg_room with fadehold1
@@ -186,7 +190,7 @@ label start:
     show spritething
     m "We welcome everyone this evening to watch Jeff Musk go into space for 5 minutes."
     m "Sponsored by Megacorp. Megacorp cares."
-    y "Oh, that is so cool"
+    y "Oh, that is so cool!"
     y "Look at the rocket go!"
     hide spritething
 
@@ -252,6 +256,7 @@ label start:
         hide spritething_concern
         show spritething_sad
         scene bg_room with fade
+        show spritething_sad
         "You wake up in an empty room. There is only a chair to sit on and a huge screen on the wall."
         jump final
 
@@ -268,10 +273,11 @@ label start:
     y "Won't this eat more of the energy bar thing?"
     m "The release will be done in 3"
     m "2"
-    m "1"
     hide spritething_sad
     show spritething_concern
     y "WAIT!!!"
+    m "1"
+
     scene black with fade 
 
     # bar reaches 0
