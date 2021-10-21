@@ -1,14 +1,15 @@
-﻿# The script of the game goes in this file.
+# The script of the game goes in this file.
 
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
 define y = Character(_("You"), color="#c8ffc8")
 define m = Character(_("Megacorp"), color="#c8c8ff")
-define gui.bar_size = 100
+define gui.bar_range = 100
 define gui.bar_tile = False
 define fadehold = Fade(0.5, 0, 0.5)
-define fadehold1 = Fade(0.5, 1.0, 1.0)
+define fadehold1 = Fade(0.5, 1.0, 0.5)
+
 
 # The game starts here.
 
@@ -76,7 +77,6 @@ label start:
     scene bg_room with fadehold1
 
  
-
     # bar appears
     show spritething_sad
     y "Uh, that was unpleasant."
@@ -129,7 +129,50 @@ label start:
     m "Oh look, we're going to release a new Phone. Do you want to preorder?"
     y "Of course I want to preorder"
     #bar gets smaller
+    y "I wanted what that bar I keep seeing means."
+    y "Whatever, guess I'll just sleep."
+
+    scene bg_room with fadehold1
+
+    show spritething
+    #bar is shorter than before
+
+    m "Hello citizen! Megacorp sponsors you this beautiful morning."
+    y "Hello Megacorp."
+    m  "What do you want to do today?"
+        
+    menu:
+             
+        "Go to work":
+            jump gotowork2
+              
+        "Play games":
+            jump playgames2 
+
+    label playgames2:
+        m "I don't think this is the right choice, but it's not like I can force you."
+        m "Enjoy wasting your day without generating profit for Megacorp. Megacorp cares."
+        m "Remember. Megacorp cares."
+    # bar gets smaller
     
+    
+    label gotowork2:
+        scene bg_work
+        show spritething
+        m "I'm glad you're choosing to be a good member of society. Now go earn your money so you can buy more things. Remember, Megacorp cares."
+        "You work diligently the whole day."
+    
+   # bar gets smaller more than the game one
+    scene bg_room
+    show spritething
+    m "We welcome everyone this evening to watch Jeff Musk go into space for 5 minutes."
+    m "Sponsored by Megacorp. Megacorp cares."
+    y "Oh, that is so cool"
+    y "Look at the rocket go!"
+
+#bar gets SIGNIFICANTLY smaller
+
+  
     show spritething_point
     
     y "Uhm, Megacorp?"
@@ -164,13 +207,15 @@ label start:
            jump insisting
 
     label notthere:
-    hide spritething_concern
-    show spritething_suspicious
+        hide spritething_concern
+        show spritething_suspicious
         y "Ah, you're right, I can't actually see anything."
         y "It must have been my imagination."
         m "Yes, must have been, citizen."
         m "Why not rest and buy yourself a brand new Product?"
-
+        y "Yes... ok..."
+        m "Have a good night citizen. Megacorp cares."
+        jump final
 
 
         
@@ -180,12 +225,28 @@ label start:
 
 
 
+    label final:
+    scene bg_room  with fade
+
+    show spritething_sad
+
+    m "Hello citizen! Megacorp sponsors you this beautiful morning."
+    y "...yeah"
+    m "We are proud to announce Megacorp is releasing a new cryptocurrency Megacoin."
+    y "Won't this eat more of the energy bar thing?"
+    m "The release will be done in 3"
+    m "2"
+    m "1"
+    y "WAIT!!!"
+    scene black with fade 
+
     # bar reaches 0
+
 
 
     "Everything stops."
 
-    #fadeout
+    "THE END (of the world)"
 
     # This ends the game.
 
